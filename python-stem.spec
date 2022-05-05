@@ -3,7 +3,7 @@
 
 Name:           python-%{pypi_name}
 Version:        %{pypi_version}
-Release:        1
+Release:        2
 Summary:        Python controller library for Tor
 
 License:        LGPL-3.0
@@ -57,7 +57,8 @@ rm -rf html/.{doctrees,buildinfo}
 
 
 %check
-%{__python3} setup.py test
+sed -i '/MOCK_VERSION/d' run_tests.py
+python3 ./run_tests.py --unit
 
 
 %files -n python3-%{pypi_name}
@@ -74,5 +75,8 @@ rm -rf html/.{doctrees,buildinfo}
 
 
 %changelog
+* Thu May 05 2022 YukariChiba <i@0x7f.cc> - 1.8.0-2
+- Fix test
+
 * Wed Sep 29 2021 herengui <herengui@uniontech.com> - 1.8.0-1
 - Initial package.
